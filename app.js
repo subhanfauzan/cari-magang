@@ -9,10 +9,8 @@ const MemoryStore = require("session-memory-store")(session);
 const bodyParser = require("body-parser");
 
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
 var adminRouter = require("./routes/admin");
-var wisataRouter = require("./routes/wisata");
-var paketRouter = require("./routes/paket");
+var perusahaanRouter = require("./routes/perusahaan");
 
 const { strict } = require("assert");
 
@@ -48,10 +46,8 @@ app.use(
 app.use(flash());
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
 app.use("/admin", adminRouter);
-app.use("/wisata", wisataRouter);
-app.use("/paket", paketRouter);
+app.use("/perusahaan", perusahaanRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

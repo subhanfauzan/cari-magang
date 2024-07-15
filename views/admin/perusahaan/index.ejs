@@ -4,26 +4,43 @@
     <meta charset="utf-8" />
     <title>Dashboard | Paket</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta
+      content="A fully featured admin theme which can be used to build CRM, CMS, etc."
+      name="description"
+    />
     <meta content="Coderthemes" name="author" />
 
     <link rel="shortcut icon" href="/assets/images/favicon.ico" />
-    <link rel="stylesheet" href="/assets/vendor/daterangepicker/daterangepicker.css" />
-    <link rel="stylesheet" href="/assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" />
+    <link
+      rel="stylesheet"
+      href="/assets/vendor/daterangepicker/daterangepicker.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css"
+    />
     <script src="/assets/js/hyper-config.js"></script>
-    <link href="/assets/css/app-saas.min.css" rel="stylesheet" type="text/css" id="app-style" />
+    <link
+      href="/assets/css/app-saas.min.css"
+      rel="stylesheet"
+      type="text/css"
+      id="app-style"
+    />
     <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
     <div class="wrapper">
-      <%- include('../partials/_head') %>
-      <%- include('../partials/_sidebar') %>
+      <%- include('../../partials/_head') %> <%- include('../../partials/_sidebar-kantor') %>
 
       <div class="content-page">
         <div class="content">
           <div class="d-flex">
-            <a type="button" href="/admin/tambahpaket" class="btn btn-secondary ms-auto">
+            <a
+              type="button"
+              href="/admin/tambahperusahaan"
+              class="btn btn-secondary ms-auto"
+            >
               Tambah
             </a>
           </div>
@@ -32,10 +49,12 @@
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Nama Paket</th>
-                  <th>Deskripsi</th>
-                  <th>Harga</th>
-                  <th>ID paket</th>
+                  <th>Admin</th>
+                  <th>Nama Perusahaan</th>
+                  <th>Kabupaten</th>
+                  <th>Alamat</th>
+                  <th>Kriteria-Magang</th>
+                  <th>Durasi-Magang</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -43,15 +62,17 @@
                 <% for(var i = 0; i < data.length; i++){ %>
                   <tr>
                     <th scope="row"><%= (i+1) %></th>                   
-                    <td><%= data[i].nama_paket %></td>
-                    <td><%= data[i].deskripsi %></td>
-                    <td><%= data[i].harga %></td> 
-                    <td><%= data[i].nama_paket %></td> 
+                    <td><%= data[i].nik %></td>
+                    <td><%= data[i].nama_perusahaan %></td>
+                    <td><%= data[i].kabupaten %></td> 
+                    <td><%= data[i].alamat %></td> 
+                    <td><%= data[i].kriteria %></td> 
+                    <td><%= data[i].durasi %></td> 
                     <td class="table-action">
-                      <a href="/paket/edit/<%= data[i].id_paket %>" class="action-icon">
+                      <a href="/perusahaan/edit/<%= data[i].id_perusahaan %>" class="action-icon">
                         <i class="mdi mdi-pencil"></i
                       ></a>
-                      <a href="/paket/delete/<%= data[i].id_paket  %>" class="action-icon">
+                      <a href="/perusahaan/delete/<%= data[i].id_perusahaan  %>" class="action-icon">
                         <i class="mdi mdi-delete"></i
                       ></a>
                     </td>

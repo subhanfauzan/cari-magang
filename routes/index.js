@@ -70,14 +70,14 @@ router.post("/log", async (req, res) => {
         if (data[0].role == "admin") {
           req.flash("success", "Berhasil login");
           res.redirect("/admin");
-          console.error(error);
         } else if (data[0].role == "mhs") {
-          res.redirect("/users");
+          res.redirect("/admin");
           req.flash("success", "Berhasil login");
-          console.error(error);
+        } else if (data[0].role == "admin-kantor") {
+          res.redirect("/perusahaan");
+          req.flash("success", "Berhasil login");
         } else {
           res.redirect("/login");
-          console.error(error);
         }
       } else {
         req.flash("error", "Email atau password salah");

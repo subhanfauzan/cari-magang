@@ -1,11 +1,11 @@
 var express = require("express");
 var router = express.Router();
-const model_paket = require("../models/model_paket.js");
-const model_wisata = require("../models/model_wisata.js");
+const model_perusahaan = require("../models/model_perusahaan.js");
+const Model_Akun = require("../models/model_akun.js");
 
 router.get("/", async function (req, res, next) {
-  let rows = await model_paket.getAll();
-  res.render("admin/paket", {
+  let rows = await model_perusahaan.getAll();
+  res.render("admin/perusahaan/", {
     data: rows,
   });
 });
@@ -36,40 +36,39 @@ router.get("/create", async function (req, res, next) {
 
 router.post("/store", async function (req, res, next) {
   try {
-    let { id_wisata, nama_paket, deskripsi, harga } = req.body;
+    let { nik, nama_perusahaan } = req.body;
     let Data = {
-      id_wisata,
-      nama_paket,
-      deskripsi,
-      harga,
+      nik,
+      nama_perusahaan,
     };
-    await model_paket.create(Data);
+    await model_perusahaan.create(Data);
     req.flash("success", "Berhasil menyimpan data");
-    res.redirect("/paket");
+    res.redirect("/admin");
   } catch (error) {
     console.error("Error:", error);
     req.flash("error", "Gagal menyimpan data");
-    res.redirect("/paket");
+    res.redirect("/perusahaan");
   }
 });
 
 router.get("/edit/:id", async function (req, res, next) {
   try {
     let id = req.params.id;
-    let rows = await model_paket.getById();
-    let rows2 = await model_wisata.getById();
-    res.render("paket/edit", {
+    let rows2 = await model_perusahaan.getById();
+    let rows = await Model_Akun.getById();
+    res.render("admin/perusahaan/edit", {
       id: id,
-      id_wisata: rows[0].id_wisata,
-      nama_paket: rows[0].nama_paket,
-      deskripsi: rows[0].deskripsi,
-      harga: rows[0].harga,
-      data_barang: rows2,
+      nik: rows2,
+      nama_perusahaan: rows2[0].nama_perusahaan,
+      kabupaten: rows2[0].kabupaten,
+      alamat: rows2[0].alamat,
+      kriteria_magang: rows2[0].kriteria_magang,
+      durasi_magang: rows2[0].durasi_magang,
     });
   } catch (error) {
     console.error("Error:", error);
-    req.flash("error", "Gagal memuat halaman edit paket");
-    res.redirect("/paket");
+    req.flash("error", "Gagal memuat halaman edit perusahaan");
+    res.redirect("/perusahaan");
   }
 });
 
@@ -83,9 +82,9 @@ router.post("/update/:id", async function (req, res, next) {
       deskripsi,
       harga,
     };
-    await model_paket.update(id, Data);
+    await model_perusahaan.update(id, Data);
     req.flash("success", "Berhasil update data");
-    res.redirect("/paket");
+    res.redirect("/editperusahaan");
   } catch (error) {
     console.error("Error:", error);
     req.flash("error", "Gagal menyimpan data");
@@ -95,7 +94,7 @@ router.post("/update/:id", async function (req, res, next) {
 
 router.get("/delete/(:id)", async function (req, res, next) {
   let id = req.params.id;
-  await model_paket.remove(id);
+  await model_perusahaan.remove(id);
   req.flash("success", "Berhasil menghapus data");
   res.redirect("/paket");
 });

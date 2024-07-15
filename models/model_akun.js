@@ -13,15 +13,34 @@ class Model_Akun {
     });
   }
 
+  static async getbyrole() {
+    return new Promise((resolve, reject) => {
+      connection.query(
+        "SELECT * FROM akun where role = 'admin-kantor' ",
+        (err, rows) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(rows);
+          }
+        }
+      );
+    });
+  }
+
   static async getById(id) {
     return new Promise((resolve, reject) => {
-      connection.query("SELECT * FROM akun WHERE nik = ?", id, (err, rows) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(rows[0]);
+      connection.query(
+        "SELECT * FROM akun WHERE nik = ?",
+        [id],
+        (err, rows) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(rows);
+          }
         }
-      });
+      );
     });
   }
 
@@ -34,7 +53,7 @@ class Model_Akun {
           if (err) {
             reject(err);
           } else {
-            resolve(rows[0]);
+            resolve(rows);
           }
         }
       );

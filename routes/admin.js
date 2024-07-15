@@ -1,39 +1,21 @@
 var express = require("express");
 var router = express.Router();
 const bcrypt = require("bcrypt");
-const ModelWisata = require('../models/model_wisata');
-const ModelPaket = require('../models/model_paket');
-const model_paket = require("../models/model_paket");
-const model_wisata = require("../models/model_wisata");
-
+const model_perusahaan = require("../models/model_perusahaan");
+const model_akun = require("../models/model_akun");
 
 router.get("/", function (req, res, next) {
   res.render("admin/index");
 });
-router.get("/paket",async function (req, res, next) {
-  let data = await model_paket.getAll();
-  res.render("admin/paket", { data: data });
-});
-router.get("/tambahpaket",async function (req, res, next) {
-  let data_wisata = await model_wisata.getAll();
-  res.render("admin/tambahpaket",{data_wisata: data_wisata});
+
+router.get("/perusahaan", async function (req, res, next) {
+  let data = await model_perusahaan.getAll();
+  res.render("admin/perusahaan", { data: data });
 });
 
-router.get("/wisata",async function (req, res, next) {
-  let data = await model_wisata.getAll();
-  res.render('admin/wisata',{ data: data });
+router.get("/tambahperusahaan", async function (req, res, next) {
+  let akun = await model_akun.getbyrole();
+  res.render("admin/tambahperusahaan", { akun });
 });
-router.get("/tambahwisata", function (req, res, next) {
-  res.render("admin/tambahwisata");
-});
-
-router.get("/pesan", function (req, res, next) {
-  res.render("admin/pesan");
-});
-router.get("/tambahpesan", function (req, res, next) {
-  res.render("admin/tambahpesan");
-});
-
-
 
 module.exports = router;
