@@ -18,4 +18,14 @@ router.get("/tambahperusahaan", async function (req, res, next) {
   res.render("admin/tambahperusahaan", { akun });
 });
 
+router.get("/akun", async function (req, res, next) {
+  let data = await model_akun.getAll();
+  res.render("admin/akun", { data: data });
+});
+
+router.get("/tambahakun", async function (req, res, next) {
+  let akun = await model_akun.getAll();
+  res.render("admin/akun/tambahakun", { akun: akun });
+});
+
 module.exports = router;

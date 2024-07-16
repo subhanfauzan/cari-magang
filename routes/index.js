@@ -71,7 +71,7 @@ router.post("/log", async (req, res) => {
           req.flash("success", "Berhasil login");
           res.redirect("/admin");
         } else if (data[0].role == "mhs") {
-          res.redirect("/admin");
+          res.redirect("/mhs");
           req.flash("success", "Berhasil login");
         } else if (data[0].role == "admin-kantor") {
           res.redirect("/perusahaan");

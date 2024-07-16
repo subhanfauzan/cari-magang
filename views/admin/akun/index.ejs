@@ -31,14 +31,14 @@
 
   <body>
     <div class="wrapper">
-      <%- include('../partials/_head') %> <%- include('../partials/_sidebar') %>
+      <%- include('../../partials/_head') %> <%- include('../../partials/_sidebar') %>
 
       <div class="content-page">
         <div class="content">
           <div class="d-flex">
             <a
               type="button"
-              href="/admin/tambahperusahaan"
+              href="/admin/tambahakun"
               class="btn btn-secondary ms-auto"
             >
               Tambah
@@ -49,13 +49,10 @@
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Admin</th>
-                  <th>Nama Perusahaan</th>
-                  <th>Kabupaten</th>
-                  <th>Alamat</th>
-                  <th>Kriteria-Magang</th>
-                  <th>Durasi-Magang</th>
-                  <th>Action</th>
+                  <th>NIK</th>
+                  <th>Email</th>
+                  <th>Password</th>
+                  <th>Role</th>
                 </tr>
               </thead>
               <tbody>
@@ -63,16 +60,14 @@
                   <tr>
                     <th scope="row"><%= (i+1) %></th>                   
                     <td><%= data[i].nik %></td>
-                    <td><%= data[i].nama_perusahaan %></td>
-                    <td><%= data[i].kabupaten %></td> 
-                    <td><%= data[i].alamat %></td> 
-                    <td><%= data[i].kriteria_magang %></td> 
-                    <td><%= data[i].durasi_magang %></td> 
+                    <td><%= data[i].email %></td>
+                    <td><%= data[i].password %></td> 
+                    <td><%= data[i].role %></td>
                     <td class="table-action">
-                      <a href="/perusahaan/edit/<%= data[i].id_perusahaan %>" class="action-icon">
+                      <a href="/akun/edit/<%= data[i].nik %>" class="action-icon">
                         <i class="mdi mdi-pencil"></i
                       ></a>
-                      <a href="/perusahaan/delete/<%= data[i].id_perusahaan  %>" class="action-icon">
+                      <a href="/akun/delete/<%= data[i].nik  %>" class="action-icon">
                         <i class="mdi mdi-delete"></i
                       ></a>
                     </td>

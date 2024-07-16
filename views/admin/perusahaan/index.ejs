@@ -35,16 +35,7 @@
 
       <div class="content-page">
         <div class="content">
-          <div class="d-flex">
-            <a
-              type="button"
-              href="/admin/tambahperusahaan"
-              class="btn btn-secondary ms-auto"
-            >
-              Tambah
-            </a>
-          </div>
-          <div class="container-fluid">
+          <div class="container-fluid pt-2">
             <table class="table table-striped table-centered mb-0">
               <thead>
                 <tr>
@@ -62,12 +53,12 @@
                 <% for(var i = 0; i < data.length; i++){ %>
                   <tr>
                     <th scope="row"><%= (i+1) %></th>                   
-                    <td><%= data[i].nik %></td>
+                    <td><%= data[i].email %></td>
                     <td><%= data[i].nama_perusahaan %></td>
                     <td><%= data[i].kabupaten %></td> 
                     <td><%= data[i].alamat %></td> 
-                    <td><%= data[i].kriteria %></td> 
-                    <td><%= data[i].durasi %></td> 
+                    <td><%= data[i].kriteria_magang %></td> 
+                    <td><%= data[i].durasi_magang %></td> 
                     <td class="table-action">
                       <a href="/perusahaan/edit/<%= data[i].id_perusahaan %>" class="action-icon">
                         <i class="mdi mdi-pencil"></i

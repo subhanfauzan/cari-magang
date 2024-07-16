@@ -3,13 +3,16 @@ const connection = require("../config/db");
 class model_perusahaan {
   static async getAll() {
     return new Promise((resolve, reject) => {
-      connection.query("SELECT * FROM perusahaan", (err, rows) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(rows);
+      connection.query(
+        "SELECT perusahaan.*, akun.* FROM perusahaan JOIN akun ON perusahaan.nik = akun.nik ORDER BY perusahaan.id_perusahaan DESC",
+        (err, rows) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(rows);
+          }
         }
-      });
+      );
     });
   }
 

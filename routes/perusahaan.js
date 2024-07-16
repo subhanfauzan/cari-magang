@@ -5,8 +5,10 @@ const Model_Akun = require("../models/model_akun.js");
 
 router.get("/", async function (req, res, next) {
   let rows = await model_perusahaan.getAll();
+  let rows2 = await Model_Akun.getAll();
   res.render("admin/perusahaan/", {
     data: rows,
+    rows2,
   });
 });
 
@@ -54,16 +56,16 @@ router.post("/store", async function (req, res, next) {
 router.get("/edit/:id", async function (req, res, next) {
   try {
     let id = req.params.id;
-    let rows2 = await model_perusahaan.getById();
-    let rows = await Model_Akun.getById();
+    let rows2 = await model_perusahaan.getById(id);
+    let rows = await Model_Akun.getbyrole();
     res.render("admin/perusahaan/edit", {
       id: id,
-      nik: rows2,
-      nama_perusahaan: rows2[0].nama_perusahaan,
-      kabupaten: rows2[0].kabupaten,
-      alamat: rows2[0].alamat,
-      kriteria_magang: rows2[0].kriteria_magang,
-      durasi_magang: rows2[0].durasi_magang,
+      akun: rows,
+      nama_perusahaan: rows2.nama_perusahaan,
+      kabupaten: rows2.kabupaten,
+      alamat: rows2.alamat,
+      kriteria_magang: rows2.kriteria_magang,
+      durasi_magang: rows2.durasi_magang,
     });
   } catch (error) {
     console.error("Error:", error);
@@ -75,20 +77,22 @@ router.get("/edit/:id", async function (req, res, next) {
 router.post("/update/:id", async function (req, res, next) {
   try {
     let id = req.params.id;
-    let { id_wisata, nama_paket, deskripsi, harga } = req.body;
+    let { nama_perusahaan, kabupaten, alamat, kriteria_magang, durasi_magang } =
+      req.body;
     let Data = {
-      id_wisata,
-      nama_paket,
-      deskripsi,
-      harga,
+      nama_perusahaan,
+      kabupaten,
+      alamat,
+      kriteria_magang,
+      durasi_magang,
     };
     await model_perusahaan.update(id, Data);
     req.flash("success", "Berhasil update data");
-    res.redirect("/editperusahaan");
+    res.redirect("/perusahaan");
   } catch (error) {
     console.error("Error:", error);
     req.flash("error", "Gagal menyimpan data");
-    res.redirect("/paket");
+    res.redirect("/perusahaan");
   }
 });
 

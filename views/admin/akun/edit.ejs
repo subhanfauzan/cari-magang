@@ -36,80 +36,54 @@
       <div class="content-page">
         <div class="content">
           <div class="container">
-            <form action="/perusahaan/update/<%- id %>" method="POST">
+            <form action="/akun/update/<%- id %>" method="POST">
               <div class="mb-2 pt-3">
-                <label for="nik" class="form-label">Akun:</label>
-                <select
-                  name="nik"
+                <label class="form-label">NIK :</label>
+                <input
+                  type="text"
+                  class="form-control"
                   id="nik"
-                  class="form-select"
+                  name="nik"
+                  placeholder="Masukkan NIK"
                   required
+                  value="<%= nik %>"
                   disabled
-                >
-                  <% akun.forEach(akun => { %>
-                  <option value="<%= akun.nik %>"><%= akun.email %></option>
+                />
+              </div>
+              <div class="mb-2">
+                <label class="form-label">Email :</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  placeholder="Masukkan email"
+                  required
+                  value="<%= email %>"
+                  disabled
+                />
+              </div>
+              <div class="mb-2">
+                <label class="form-label">Password :</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                  placeholder="Masukkan password"
+                  required
+                  value="<%= password %>"
+                  disabled
+                />
+              </div>
+              <div class="mb-2">
+                <label for="role" class="form-label">Role:</label>
+                <select name="role" id="role" class="form-select" required>
+                  <option value="" disabled>Pilih Role</option>
+                  <% role.forEach(role => { %>
+                  <option value="<%= role %>" selected><%= role.role %></option>
                   <% }); %>
                 </select>
-              </div>
-
-              <div class="mb-2">
-                <label class="form-label" for="nama_perusahaan"
-                  >Nama perusahaan</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="nama_perusahaan"
-                  name="nama_perusahaan"
-                  placeholder="Masukkan Nama perusahaan"
-                  required
-                  value="<%= nama_perusahaan %>"
-                />
-              </div>
-              <div class="mb-2">
-                <label class="form-label" for="kabupaten">kabupaten</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="kabupaten"
-                  name="kabupaten"
-                  placeholder="Masukkan kabupaten"
-                  required
-                  value="<%= kabupaten %>"
-                />
-              </div>
-              <div class="mb-2">
-                <label class="form-label" for="alamat">alamat</label>
-                <input
-                  class="form-control"
-                  id="alamat"
-                  name="alamat"
-                  placeholder="Masukkan alamat"
-                  required
-                  value="<%= alamat %>"
-                />
-              </div>
-              <div class="mb-2">
-                <label class="form-label" for="kriteria">kriteria</label>
-                <input
-                  class="form-control"
-                  id="kriteria_magang"
-                  name="kriteria_magang"
-                  placeholder="Masukkan kriteria"
-                  required
-                  value="<%= kriteria_magang %>"
-                />
-              </div>
-              <div class="mb-2">
-                <label class="form-label" for="durasi">durasi</label>
-                <input
-                  class="form-control"
-                  id="durasi_magang"
-                  name="durasi_magang"
-                  placeholder="Masukkan durasi"
-                  required
-                  value="<%= durasi_magang %>"
-                />
               </div>
 
               <button class="btn btn-secondary" type="submit">Update</button>
