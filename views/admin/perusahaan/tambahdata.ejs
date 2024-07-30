@@ -30,22 +30,18 @@
 
   <body>
     <div class="wrapper">
-      <%- include('../partials/_head') %> <%- include('../partials/_sidebar') %>
+      <%- include('../../partials/_head') %> <%-
+      include('../../partials/_sidebar-kantor') %>
 
       <div class="content-page">
         <div class="content">
           <div class="container">
             <form action="/perusahaan/store" method="POST">
-              <div class="mb-2 pt-3">
+              <div class="mb-2 pt-3" hidden>
                 <label for="nik" class="form-label">Akun:</label>
-                <select name="nik" id="nik" class="form-select" required>
-                  <option value="" disabled selected>Pilih akun</option>
-                  <% akun.forEach(akun => { %>
-                  <option value="<%= akun.nik %>"><%= akun.email %></option>
-                  <% }); %>
-                </select>
+                <input type="text" value="<%= nik %>" id="nik" name="nik" />
               </div>
-              <div class="mb-2">
+              <div class="mb-2 pt-3">
                 <label class="form-label" for="nama_perusahaan"
                   >Nama perusahaan</label
                 >
@@ -83,8 +79,8 @@
                 <label class="form-label" for="kriteria">kriteria</label>
                 <input
                   class="form-control"
-                  id="kriteria"
-                  name="kriteria"
+                  id="kriteria_magang"
+                  name="kriteria_magang"
                   placeholder="kriteria"
                   required
                 />
@@ -93,8 +89,8 @@
                 <label class="form-label" for="durasi">durasi</label>
                 <input
                   class="form-control"
-                  id="durasi"
-                  name="durasi"
+                  id="durasi_magang"
+                  name="durasi_magang"
                   placeholder="durasi"
                   required
                 />

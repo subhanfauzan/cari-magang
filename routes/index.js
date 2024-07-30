@@ -2,10 +2,14 @@ var express = require("express");
 var router = express.Router();
 const bcrypt = require("bcrypt");
 const Model_Akun = require("../models/model_akun");
+const Model_perusahaan = require("../models/model_perusahaan");
 
 // GET home page
-router.get("/", function (req, res) {
-  res.render("index", { title: "Express" });
+router.get("/", async function (req, res, next) {
+  let rows2 = await Model_perusahaan.getAll();
+  res.render("index", {
+    data: rows2,
+  });
 });
 
 // GET register page
@@ -62,20 +66,19 @@ router.post("/log", async (req, res) => {
   let { email, password } = req.body;
   try {
     let data = await Model_Akun.getByEmail(email);
+    console.log("Data Akun:", data);
     if (data.length > 0) {
       let encryptedPassword = data[0].password;
       let isPasswordMatch = await bcrypt.compare(password, encryptedPassword);
       if (isPasswordMatch) {
         req.session.userId = data[0].nik;
+        req.flash("success", "Berhasil login");
         if (data[0].role == "admin") {
-          req.flash("success", "Berhasil login");
           res.redirect("/admin");
         } else if (data[0].role == "mhs") {
           res.redirect("/mhs");
-          req.flash("success", "Berhasil login");
         } else if (data[0].role == "admin-kantor") {
           res.redirect("/perusahaan");
-          req.flash("success", "Berhasil login");
         } else {
           res.redirect("/login");
         }

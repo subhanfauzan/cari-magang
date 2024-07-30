@@ -1,10 +1,10 @@
 const connection = require("../config/db");
 
-class model_perusahaan {
+class Model_biodata {
   static async getAll() {
     return new Promise((resolve, reject) => {
       connection.query(
-        "SELECT perusahaan.*, akun.* FROM perusahaan JOIN akun ON perusahaan.nik = akun.nik ORDER BY perusahaan.id_perusahaan DESC",
+        "SELECT * FROM biodata ORDER BY nik DESC",
         (err, rows) => {
           if (err) {
             reject(err);
@@ -16,16 +16,15 @@ class model_perusahaan {
     });
   }
 
-  static async getBynik(nik) {
+  static async getbyrole() {
     return new Promise((resolve, reject) => {
       connection.query(
-        "SELECT * FROM perusahaan WHERE nik = ?",
-        [nik],
+        "SELECT * FROM biodata where role = 'admin-kantor' ",
         (err, rows) => {
           if (err) {
             reject(err);
           } else {
-            resolve(rows || []);
+            resolve(rows);
           }
         }
       );
@@ -35,13 +34,29 @@ class model_perusahaan {
   static async getById(id) {
     return new Promise((resolve, reject) => {
       connection.query(
-        "SELECT * FROM perusahaan WHERE id_perusahaan = ?",
+        "SELECT * FROM biodata WHERE nik = ?",
         [id],
         (err, rows) => {
           if (err) {
             reject(err);
           } else {
-            resolve(rows[0]);
+            resolve(rows);
+          }
+        }
+      );
+    });
+  }
+
+  static async getByEmail(email) {
+    return new Promise((resolve, reject) => {
+      connection.query(
+        "SELECT * FROM biodata WHERE email = ?",
+        [email],
+        function (err, rows) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(rows);
           }
         }
       );
@@ -50,7 +65,7 @@ class model_perusahaan {
 
   static async create(data) {
     return new Promise((resolve, reject) => {
-      connection.query("INSERT INTO perusahaan SET ?", data, (err, result) => {
+      connection.query("INSERT INTO biodata SET ?", data, (err, result) => {
         if (err) {
           reject(err);
         } else {
@@ -63,13 +78,13 @@ class model_perusahaan {
   static async update(id, data) {
     return new Promise((resolve, reject) => {
       connection.query(
-        "UPDATE perusahaan SET ? WHERE id_perusahaan = ?",
+        "UPDATE biodata SET ? WHERE nik = ?",
         [data, id],
         (err, result) => {
           if (err) {
             reject(err);
           } else {
-            resolve(result.affectedRows); // Mengembalikan jumlah baris yang terpengaruh oleh perintah UPDATE
+            resolve(result.affectedRows);
           }
         }
       );
@@ -79,13 +94,13 @@ class model_perusahaan {
   static async remove(id) {
     return new Promise((resolve, reject) => {
       connection.query(
-        "DELETE FROM perusahaan WHERE id_perusahaan = ?",
-        [id],
+        "DELETE FROM biodata WHERE nik = ?",
+        id,
         (err, result) => {
           if (err) {
             reject(err);
           } else {
-            resolve(result.affectedRows); // Mengembalikan jumlah baris yang terpengaruh oleh perintah DELETE
+            resolve(result.affectedRows);
           }
         }
       );
@@ -93,4 +108,4 @@ class model_perusahaan {
   }
 }
 
-module.exports = model_perusahaan;
+module.exports = Model_biodata;

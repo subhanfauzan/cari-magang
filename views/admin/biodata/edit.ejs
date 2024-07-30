@@ -30,76 +30,68 @@
 
   <body>
     <div class="wrapper">
-      <%- include('../partials/_head') %> <%- include('../partials/_sidebar') %>
+      <%- include('../../partials/_head') %> <%-
+      include('../../partials/_sidebar') %>
 
       <div class="content-page">
         <div class="content">
           <div class="container">
             <form action="/perusahaan/store" method="POST">
               <div class="mb-2 pt-3">
-                <label for="nik" class="form-label">Akun:</label>
-                <select name="nik" id="nik" class="form-select" required>
-                  <option value="" disabled selected>Pilih akun</option>
-                  <% akun.forEach(akun => { %>
-                  <option value="<%= akun.nik %>"><%= akun.email %></option>
-                  <% }); %>
-                </select>
+                <label class="form-label" for="nik">Nik</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nik"
+                  name="nik"
+                  placeholder="NIK"
+                  required
+                  disabled
+                  value="<%= nik %>"
+                />
               </div>
               <div class="mb-2">
-                <label class="form-label" for="nama_perusahaan"
-                  >Nama perusahaan</label
+                <label class="form-label" for="nama_lengkap"
+                  >Nama lengkap</label
                 >
                 <input
                   type="text"
                   class="form-control"
-                  id="nama_perusahaan"
-                  name="nama_perusahaan"
-                  placeholder="Nama perusahaan"
+                  id="nama_lengkap"
+                  name="nama_lengkap"
+                  placeholder="Nama Lengkap"
                   required
+                  value="<%= nama_lengkap %>"
                 />
               </div>
               <div class="mb-2">
-                <label class="form-label" for="kabupaten">kabupaten</label>
+                <label class="form-label" for="perguruan_tinggi"
+                  >Perguruan Tinggi</label
+                >
                 <input
                   type="text"
                   class="form-control"
-                  id="kabupaten"
-                  name="kabupaten"
-                  placeholder="kabupaten"
+                  id="perguruan_tinggi"
+                  name="perguruan_tinggi"
+                  placeholder="Nama Lengkap"
                   required
+                  value="<%= perguruan_tinggi %>"
                 />
               </div>
               <div class="mb-2">
-                <label class="form-label" for="alamat">alamat</label>
+                <label class="form-label" for="prodi">Nama Prodi</label>
                 <input
+                  type="text"
                   class="form-control"
-                  id="alamat"
-                  name="alamat"
-                  placeholder="alamat"
+                  id="prodi"
+                  name="prodi"
+                  placeholder="Nama Lengkap"
                   required
+                  value="<%= prodi %>"
                 />
               </div>
-              <div class="mb-2">
-                <label class="form-label" for="kriteria">kriteria</label>
-                <input
-                  class="form-control"
-                  id="kriteria"
-                  name="kriteria"
-                  placeholder="kriteria"
-                  required
-                />
-              </div>
-              <div class="mb-2">
-                <label class="form-label" for="durasi">durasi</label>
-                <input
-                  class="form-control"
-                  id="durasi"
-                  name="durasi"
-                  placeholder="durasi"
-                  required
-                />
-              </div>
-              <button class="btn btn-primary" type="submit">Submit</button>
+
+              <button class="btn btn-secondary" type="submit">Daftar</button>
             </form>
           </div>
         </div>
