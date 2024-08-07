@@ -14,6 +14,9 @@ var perusahaanRouter = require("./routes/perusahaan");
 var akunRouter = require("./routes/akun");
 var biodataRouter = require("./routes/biodata");
 var mhsRouter = require("./routes/mhs");
+var berkasRouter = require("./routes/berkas");
+var listRouter = require("./routes/list");
+var detailRouter = require("./routes/detail");
 
 const { strict } = require("assert");
 
@@ -54,6 +57,9 @@ app.use("/perusahaan", perusahaanRouter);
 app.use("/akun", akunRouter);
 app.use("/biodata", biodataRouter);
 app.use("/mhs", mhsRouter);
+app.use("/berkas", berkasRouter);
+app.use("/list", listRouter);
+app.use("/detail", detailRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

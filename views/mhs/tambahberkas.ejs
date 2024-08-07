@@ -27,14 +27,6 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4"></ul>
           <div class="d-flex">
-            <a
-              id="daftarMagangButton"
-              class="btn btn-outline-dark me-2"
-              href="#"
-            >
-              <i class=""></i>
-              Daftar Magang
-            </a>
             <a class="btn btn-outline-dark" href="/logout">
               <i class="bi bi-person me-1"></i>
               Log Out
@@ -43,52 +35,37 @@
         </div>
       </div>
     </nav>
-
-    <!-- Content section-->
-    <% for (var i = 0; i < data.length; i++) { %>
-    <form
-      action="/update/<%= data[i].perguruan_tinggi %>"
-      method="post"
-      enctype="multipart/form-data"
-    >
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4">
+    <!-- Product section-->
+    <div class="container">
+      <div class="row">
+        <% for(var i = 0; i < data.length; i++){ %>
+        <div class="col-lg-4">
+          <form
+            action="/update/<%= data[i].perguruan_tinggi %>"
+            method="post"
+            enctype="multipart/form-data"
+          >
             <div class="container">
               <div class="row">
                 <div class="pt-4">
                   <div class="card profile-card text-center">
                     <i class="bi bi-person-circle" style="font-size: 400%"></i>
                     <div class="card-body">
-                      <% if (data[i].nama_lengkap.length > 0) { %>
                       <h5 class="card-title"><%= data[i].nama_lengkap %></h5>
                       <p class="card-text"><%= data[i].perguruan_tinggi %></p>
-                      <% } else { %>
-                      <p>Tolong lengkapi Data Pribadi</p>
-                      <% } %>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
             <div class="container">
               <div class="row">
                 <div class="pt-3">
                   <div class="card profile-card">
                     <div class="card-body">
-                      <div
-                        class="d-flex justify-content-between align-items-center"
-                      >
-                        <h5 class="card-title">Data Pribadi</h5>
-                        <a
-                          href="/mhs/edit/<%= data[i].nik %>"
-                          class="bi bi-pencil-square"
-                          style="color: black"
-                        ></a>
-                      </div>
+                      <h5 class="card-title">Data Pribadi</h5>
                       <p class="card-text d-flex align-items-center">
-                        NIK:
+                        NIK :
                         <input
                           class="form-control ms-2"
                           type="text"
@@ -98,7 +75,7 @@
                         />
                       </p>
                       <p class="card-text d-flex align-items-center">
-                        Nama Lengkap:
+                        Nama Lengkap :
                         <input
                           class="form-control ms-2"
                           type="text"
@@ -110,7 +87,7 @@
                         />
                       </p>
                       <p class="card-text d-flex align-items-center">
-                        Perguruan Tinggi:
+                        Perguruan Tinggi :
                         <input
                           class="form-control ms-2"
                           type="text"
@@ -122,7 +99,7 @@
                         />
                       </p>
                       <p class="card-text d-flex align-items-center">
-                        Prodi:
+                        Prodi :
                         <input
                           class="form-control ms-2"
                           type="text"
@@ -138,112 +115,92 @@
                 </div>
               </div>
             </div>
-          </div>
-          <% } %>
-
-          <div class="col-lg-8 mb-2">
+          </form>
+        </div>
+        <div class="col-lg-8">
+          <form
+            action="/berkas/store"
+            method="post"
+            enctype="multipart/form-data"
+          >
             <div class="container">
               <div class="row">
-                <% if (berkas.length === 0) { %>
-                <div class="col-md-12 pt-4">
+                <div class="col-md-10 pt-4">
                   <div class="card profile-card text-center">
                     <div class="card-body">
-                      <div
-                        class="d-flex justify-content-between align-items-center"
-                      >
-                        <h5 class="card-title">Document</h5>
-                        <a
-                          href="/berkas/create"
-                          class="bi bi-pencil-square"
-                          style="color: black"
-                        ></a>
-                      </div>
-                      <p style="text-align: start">
-                        Lengkapi dokumen untuk mempermudah proses pendaftaran
+                      <h4 class="card-title">Document</h4>
+                      <p>
+                        Lengkapi dokumen untuk mempermudah proses pendaftaraan
                         magang.
                       </p>
-                      <div class="mb-3">
-                        <label class="form-label text-start w-100">KTP :</label>
+                      <div class="mb-3" hidden>
+                        <label class="form-label text-start w-100">nik :</label>
+                        <input
+                          class="form-control"
+                          type="text"
+                          id="nik"
+                          value="<%= data[i].nik %>"
+                          name="nik"
+                          hidden
+                        />
                       </div>
                       <div class="mb-3">
-                        <label class="form-label text-start w-100">CV :</label>
+                        <label
+                          for="formFile"
+                          class="form-label text-start w-100"
+                          >KTP :</label
+                        >
+                        <input
+                          class="form-control"
+                          type="file"
+                          id="formFile"
+                          name="foto_ktp"
+                        />
                       </div>
                       <div class="mb-3">
-                        <label class="form-label text-start w-100"
+                        <label
+                          for="formFile"
+                          class="form-label text-start w-100"
+                          >CV :</label
+                        >
+                        <input
+                          class="form-control"
+                          type="file"
+                          id="formFile"
+                          name="cv"
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label
+                          for="formFile"
+                          class="form-label text-start w-100"
                           >SK PRESTASI :</label
                         >
+                        <input
+                          class="form-control"
+                          type="file"
+                          id="formFile"
+                          name="sertifikat_prestasi"
+                        />
                       </div>
+                      <button type="submit" class="btn btn-secondary">
+                        Submit
+                      </button>
+                      <a href="/mhs" class="btn btn-secondary"> Cancel </a>
                     </div>
                   </div>
                 </div>
-                <% } else { %> <% for (var i = 0; i < berkas.length; i++) { %>
-                <div class="col-md-6 pt-4">
-                  <div class="card profile-card text-center">
-                    <div class="card-body">
-                      <div
-                        class="d-flex justify-content-between align-items-center"
-                      >
-                        <h5 class="card-title">Document</h5>
-                        <a
-                          href="/berkas/create"
-                          class="bi bi-pencil-square"
-                          style="color: black"
-                        ></a>
-                      </div>
-                      <p style="text-align: start">
-                        Lengkapi dokumen untuk mempermudah proses pendaftaran
-                        magang.
-                      </p>
-                      <div class="mb-3">
-                        <label class="form-label text-start w-100">NIK :</label>
-                        <img
-                          src="/uploads/<%= berkas[i].foto_ktp %>"
-                          class="img-thumbnail w-75"
-                        />
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label text-start w-100">CV :</label>
-                        <img
-                          src="/uploads/<%= berkas[i].cv %>"
-                          class="img-thumbnail w-75"
-                        />
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label text-start w-100"
-                          >SK PRESTASI :</label
-                        >
-                        <img
-                          src="/uploads/<%= berkas[i].sertifikat_prestasi %>"
-                          class="img-thumbnail w-75"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <% } %> <% } %>
               </div>
             </div>
-          </div>
+          </form>
         </div>
+        <% } %>
       </div>
-    </form>
+    </div>
 
     <!-- Bootstrap core JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-      document
-        .getElementById("daftarMagangButton")
-        .addEventListener("click", function (event) {
-          var namaLengkap = document.getElementById("nama_lengkap").value;
-          if (!namaLengkap) {
-            event.preventDefault();
-            alert("Tolong lengkapi Data Pribadi terlebih dahulu.");
-          } else {
-            window.location.href = "/list";
-          }
-        });
-    </script>
   </body>
 </html>

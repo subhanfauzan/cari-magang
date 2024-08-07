@@ -3,18 +3,18 @@ var router = express.Router();
 const Model_biodata = require("../models/model_biodata.js");
 const bcrypt = require("bcrypt");
 const model_perusahaan = require("../models/model_perusahaan.js");
-const Model_Akun = require("../models/model_akun.js");
-const session = require("express-session");
+const Model_Berkas = require("../models/model_berkas.js");
 
 router.get("/", async function (req, res, next) {
   const nik = req.session.userId;
   let akun = await Model_biodata.getById(nik);
+  let berkas = await Model_Berkas.getAll(nik);
   if (!akun) {
-    // Handle the case where `akun` is null or undefined (e.g., redirect to login)
     return res.redirect("/login"); // Example redirect
   }
   res.render("mhs/", {
     data: akun,
+    berkas: berkas,
   });
 });
 
@@ -55,7 +55,7 @@ router.get("/edit/:id", async function (req, res, next) {
   try {
     const id = req.params.id;
     let biodata = await Model_biodata.getById(id);
-    res.render("mhs/", {
+    res.render("mhs/editbiodata", {
       id: id,
       nik: biodata[0].nik,
       nama_lengkap: biodata[0].nama_lengkap,
@@ -73,18 +73,25 @@ router.post("/update/:id", async function (req, res, next) {
   try {
     let id = req.params.id;
     let { nama_lengkap, perguruan_tinggi, prodi } = req.body;
+
+    // console.log("Received Data:", req.body); // Log data yang diterima
+
     let Data = {
       nama_lengkap,
       perguruan_tinggi,
       prodi,
     };
-    await Model_biodata.update(id, Data);
+
+    let result = await Model_biodata.update(id, Data);
+
+    // console.log("Update Result:", result); // Log hasil update
+
     req.flash("success", "Berhasil update data");
-    res.redirect("/perusahaan");
+    res.redirect("/mhs");
   } catch (error) {
     console.error("Error:", error);
     req.flash("error", "Gagal menyimpan data");
-    res.redirect("/mhs");
+    res.redirect("/biodata");
   }
 });
 
